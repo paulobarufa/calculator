@@ -37,6 +37,7 @@ let screen = document.getElementById("screen");
 
 let displayValue = 0;
 let storedValue = 0;
+let secondValue = 0;
 let operator = "";
 
 let numArrays = document.querySelectorAll(".num-btn");
@@ -52,6 +53,8 @@ let operatorArray = document.querySelectorAll(".op-btn");
 operatorArray.forEach(element => {
     element.addEventListener("click", function(e){
         let op = e.target.id.replace("k", "");
+
+        secondValue = displayValue;
 
         if (operator == "") {
             
@@ -71,16 +74,29 @@ operatorArray.forEach(element => {
 
         } else {
 
-            let newVal = operate(storedValue, displayValue, op);
-            storedValue == displayValue;
+            let newVal = operate(storedValue, secondValue, operator);
+            
+            operator = op;
+            storedValue = newVal;
 
             displayValue = newVal.toString();
             updateDisplay(displayValue);
+
+            displayValue = 0;
         }
 
 
     });
 })
+
+let clearBtn = document.getElementById("kclear");
+clearBtn.addEventListener("click", function(e){
+    displayValue = 0;
+    secondValue = 0;
+    storedValue = 0;
+    operator = "";
+    updateDisplay(displayValue);
+});
 
 
 
