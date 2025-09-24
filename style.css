@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.header{
+    display: flex;
+    justify-content: flex-start;
+    width: 380px;
+}
+
+h1 {
+    font-size: 35px;
+    margin: 0px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    -webkit-text-stroke: 1px rgb(102, 102, 102);
+    color: white;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 650px;
+    width: 400px;
+    background-color: rgb(234, 234, 234);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#screen {
+    flex-shrink: 0;
+    height: 100px;
+    width: 380px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.keypad {
+    width: 380px;
+    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.btn {
+    height: 88px;
+    width: 88px;
+    border: 1px solid rgb(89, 89, 89);
+    background-color: rgb(207, 207, 207);
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.op-btn {
+    background-color: rgb(254, 193, 79);
+}
+
+.num-btn {
+
+}
+
+#kclear {
+    width: 280px;
+    background-color: rgb(255, 126, 126);
+}
+
+#kequals {
+    width: 184px;
+    background-color: rgb(165, 214, 255);
+}
