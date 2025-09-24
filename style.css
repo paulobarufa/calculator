@@ -34,9 +34,13 @@ h1 {
 }
 
 #screen {
+    text-align: right;
+    padding: 10px;
+    line-height: 120px;
+    font-size: 40px;
     flex-shrink: 0;
-    height: 100px;
-    width: 380px;
+    height: 80px;
+    width: 360px;
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
@@ -63,10 +67,6 @@ h1 {
 
 .op-btn {
     background-color: rgb(254, 193, 79);
-}
-
-.num-btn {
-
 }
 
 #kclear {
