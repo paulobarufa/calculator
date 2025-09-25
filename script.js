@@ -39,38 +39,69 @@ let displayValue = 0;
 let storedValue = 0;
 let secondValue = 0;
 let operator = "";
+let newCalc = true;
 
 let numArrays = document.querySelectorAll(".num-btn");
+let operatorArray = document.querySelectorAll(".op-btn");
+let clearBtn = document.getElementById("kclear");
+let equalsBtn = document.getElementById("kequals");
+
+
 numArrays.forEach(element => {
     element.addEventListener("click", function(e){
+
+        operatorArray.forEach(ele => {
+            ele.classList.remove("active");
+        });
+
+        if (newCalc == true) {
+            displayValue = 0;
+            newCalc = false;
+        }
+
         let val = e.target.id.replace("k", "");
+
         displayValue = displayValue == 0 ? val.toString() : displayValue + val.toString();
         updateDisplay(displayValue);
     });
 });
 
-let operatorArray = document.querySelectorAll(".op-btn");
+
 operatorArray.forEach(element => {
     element.addEventListener("click", function(e){
+
+        let liveOperatorArray = document.querySelectorAll(".op-btn");
+
         let op = e.target.id.replace("k", "");
+        let activeFlag = false;
+        
+        liveOperatorArray.forEach(ele => {
+
+            if (ele.classList.contains("active")) {
+                activeFlag = true;
+            }
+
+            if (ele.id == e.target.id) {
+                ele.classList.add("active");
+            } else {
+                ele.classList.remove("active");
+            }
+        })
 
         secondValue = displayValue;
+
+
+
+        if (activeFlag) {
+            operator = op;
+            return;
+        }
 
         if (operator == "") {
             
             operator = op;
             storedValue = displayValue;
             displayValue = 0;
-
-        } else if (op == "equals") {
-
-            let newVal = operate(storedValue, displayValue, operator);
-
-            operator = "";
-            storedValue == displayValue;
-
-            displayValue = newVal.toString();
-            updateDisplay(displayValue);
 
         } else {
 
@@ -85,12 +116,14 @@ operatorArray.forEach(element => {
             displayValue = 0;
         }
 
-
     });
 })
 
-let clearBtn = document.getElementById("kclear");
 clearBtn.addEventListener("click", function(e){
+    operatorArray.forEach(ele => {
+        ele.classList.remove("active");
+    });
+
     displayValue = 0;
     secondValue = 0;
     storedValue = 0;
@@ -98,5 +131,16 @@ clearBtn.addEventListener("click", function(e){
     updateDisplay(displayValue);
 });
 
+equalsBtn.addEventListener("click", function(e){
 
+    let newVal = operate(storedValue, displayValue, operator);
+
+    operator = "";
+    storedValue = displayValue;
+
+    displayValue = newVal.toString();
+    updateDisplay(displayValue);
+
+    newCalc = true;
+});
 
