@@ -1,17 +1,17 @@
 function add(a, b) {
-    return parseInt(a) + parseInt(b);
+    return parseFloat(a) + parseFloat(b);
 }
 
 function subtract(a, b) {
-    return parseInt(a) - parseInt(b);
+    return parseFloat(a) - parseFloat(b);
 }
 
 function multiply(a, b) {
-    return parseInt(a) * parseInt(b);
+    return parseFloat(a) * parseFloat(b);
 }
 
 function divide(a, b) {
-    return parseInt(a) / parseInt(b);
+    return parseFloat(a) / parseFloat(b);
 }
 
 function operate(a, b, operation) {
@@ -60,8 +60,13 @@ numArrays.forEach(element => {
         }
 
         let val = e.target.id.replace("k", "");
+        if (val == "decimal") {
+            val = "."
+        }
 
-        displayValue = displayValue == 0 ? val.toString() : displayValue + val.toString();
+        if (displayValue.toString().includes(".") && val == ".") return;
+
+        displayValue = displayValue == "0" && val !== "." ? val.toString() : displayValue + val.toString();
         secondValue = displayValue;
         updateDisplay(displayValue);
     });
@@ -106,7 +111,7 @@ operatorArray.forEach(element => {
 
         } else {
 
-            let newVal = operate(storedValue, secondValue, operator);
+            let newVal = Math.round((operate(storedValue, secondValue, operator) + Number.EPSILON) * 100) / 100;
 
             operator = op == "equals" ? "" : op;
             storedValue = newVal;
@@ -135,7 +140,7 @@ clearBtn.addEventListener("click", function(e){
 
 equalsBtn.addEventListener("click", function(e){
 
-    let newVal = operate(storedValue, displayValue, operator);
+    let newVal = Math.round((operate(storedValue, displayValue, operator) + Number.EPSILON) * 100) / 100;
 
     operator = "";
     storedValue = displayValue;
